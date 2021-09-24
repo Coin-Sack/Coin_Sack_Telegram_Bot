@@ -143,15 +143,15 @@ bot.command('stopupdates', Telegraf.privateChat(context => {
 
 
 // Bot Help Command
-bot.help(context => {
-    context.replyWithMarkdown(fs.readFileSync('./replies/help.md').toString());
-});
+//bot.help(context => {
+//    context.replyWithMarkdown(fs.readFileSync('./replies/help.md').toString());
+//});
+
+
+// Launch Bot
+bot.launch();
 
 
 // Gracefully Deal With Shutdowns
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
-
-
-// Launch Bot
-bot.launch();
