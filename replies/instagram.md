@@ -1,3 +1,4 @@
-Follow Coin Sack on Instagram!
+*Follow Coin Sack on Instagram!*
 
-https://www.instagram.com/coin.sack/
+[@coin.sack](https://www.instagram.com/coin.sack/)
+_[instagram.com/coin.sack](https://www.instagram.com/coin.sack/)_

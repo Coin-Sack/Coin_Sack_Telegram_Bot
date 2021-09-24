@@ -33,17 +33,9 @@ Telegraf.groupChat([
         LOG("/whitepaper", context);
         context.replyWithMarkdown(fs.readFileSync('./replies/whitepaper.md').toString());
     }),
-    bot.command('roadmap', async function(context) {
-        LOG("/roadmap", context);
-        context.replyWithMarkdown(fs.readFileSync('./replies/roadmap.md').toString());
-    }),
-    bot.command('token', async function(context) {
-        LOG("/token", context)
-        context.replyWithMarkdown(fs.readFileSync('./replies/token.md').toString());
-    }),
-    bot.command('price', async function(context) {
-        LOG("/price", context);
-        context.replyWithMarkdown(fs.readFileSync('./replies/price.md').toString());
+    bot.command('contract', async function(context) {
+        LOG("/contract", context)
+        context.replyWithMarkdown(fs.readFileSync('./replies/contract.md').toString());
     }),
     bot.command('socials', async function(context) {
         LOG("/socials", context);
@@ -70,6 +62,7 @@ Telegraf.groupChat([
         context.replyWithMarkdown(fs.readFileSync('./replies/issue.md').toString());
     })
 ]);
+
 
 Telegraf.admin([
     bot.command('start', async function(context) {
@@ -101,6 +94,7 @@ Telegraf.admin([
         }
     })
 ]);
+
 
 const sendContextUpdates = function() {
     LOG("schedule recurring updates");

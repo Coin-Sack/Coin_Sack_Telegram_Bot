@@ -1,3 +1,5 @@
-Submit a feature request or bug report for the Coin Sack Telegram bot on GitHub!
+*Help improve the Coin Sack Telegram bot!*
 
-https://github.com/Coin-Sack/Coin_Sack_Telegram_Bot/issues/new
+Submit a feature request or bug report via GitHub issues online.
+
+[github.com/Coin-Sack/Coin_Sack_Telegram_Bot/issues/new](https://github.com/Coin-Sack/Coin_Sack_Telegram_Bot/issues/new)

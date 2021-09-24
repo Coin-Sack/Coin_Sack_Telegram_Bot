@@ -1,3 +1,3 @@
-Automatic Coin Sack updates have been disabled for this chat. 
+*Automatic Coin Sack updates have been disabled for this chat.*
 
-Use the command /start-updates to begin them again!
+_Use the command /start to begin automaic updates._

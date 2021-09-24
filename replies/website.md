@@ -1,3 +1,3 @@
-View the Coin Sack website!
+*View the Coin Sack website!*
 
-https://Coin-Sack.com
+[Coin-Sack.com](https://coin-sack.com/)

@@ -1,6 +1,0 @@
-*Add the CS token to your smart chain wallet!*
-
-0x125Ce3f13950C5fA94397927F88C352FdED680Ad
-
-[View the CS token on BSCScan](https://bscscan.com/token/0x125Ce3f13950C5fA94397927F88C352FdED680Ad)
-[bscscan.com/token/0x125Ce3f13950C5fA94397927F88C352FdED680Ad](https://bscscan.com/token/0x125Ce3f13950C5fA94397927F88C352FdED680Ad)

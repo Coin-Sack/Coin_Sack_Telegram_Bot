@@ -1,3 +1,4 @@
-Follow Coin Sack on Twitter!
+*Follow Coin Sack on Twitter!*
 
-https://twitter.com/coin_sack
+[@coin_sack](https://twitter.com/coin_sack)
+_[twitter.com/coin_sack](https://twitter.com/coin_sack)_

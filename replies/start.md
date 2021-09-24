@@ -1,3 +1,3 @@
-Automatic Coin Sack updates have been enabled for this chat!
+*Automatic Coin Sack updates have been enabled for this chat!*
 
-Use the command /stop-updates to stop automatic updates.
+_Use the command /stop to stop automatic updates._

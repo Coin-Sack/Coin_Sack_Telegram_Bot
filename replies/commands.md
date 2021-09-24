@@ -1,10 +1,9 @@
-Here is a list of my commands!
+*Coin Sack Bot Commands*
 
 /about - view up to date, general project information
 /website - get a link to the project's website
 
 /whitepaper - download & read the project's whitepaper
-/roadmap - view the project's roadmap & current progress
 
 /socials - get a list of links to all Coin Sack social medias
 /instagram - get a link to the Coin Sack Instagram
@@ -15,5 +14,4 @@ Here is a list of my commands!
 /price - get the current price of the CS token
 
 /commands - view a list of my commands
-/help - get detailed instructions regarding my usage
 /issue - submit a feature request or bug report for my development
