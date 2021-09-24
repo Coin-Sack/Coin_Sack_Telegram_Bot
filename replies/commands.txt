@@ -1,0 +1,23 @@
+Here is a list of my commands:
+
+/about - view up to date, general project information
+/website - get a link to the project's website
+
+/whitepaper - download & read the project's whitepaper
+/roadmap - view the project's roadmap & current progress
+
+/socials - get a list of links to all Coin Sack social medias
+/instagram - get a link to the Coin Sack Instagram
+/twitter - get a link to the Coin Sack Twitter
+/github - get a link to the Coin Sack GitHub
+
+/token - view the address of the CS token on the BSC Mainnet
+/price - get the current price of the CS token
+/contract - view the Coin Sack smart contract & source code
+
+/introduce - have me introduce myself and what I do
+/start - start my automatic updates in a chat
+/stop - stop my automatic updates within a chat
+
+/commands - view a list of my commands
+/issue - submit a feature request or bug report for my development

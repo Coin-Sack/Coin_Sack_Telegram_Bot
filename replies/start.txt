@@ -1,0 +1,3 @@
+Automatic Coin Sack updates have been enabled! Sit back and let me keep you up to date...
+
+Use the command /stop to stop automatic updates.
