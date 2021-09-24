@@ -20,7 +20,7 @@ fs.readdirSync('./updates').forEach((updateFile) => {
     console.log(updateFile.toString())
     possibleUpdates.push(updateFile.toString());
 });
-cron.schedule('35 * * * *', () => {
+cron.schedule('35 */3 * * *', () => {
     var chosenUpdate = undefined; 
     do {
         chosenUpdate = possibleUpdates[Math.floor(Math.random()*possibleUpdates.length)];
@@ -82,11 +82,10 @@ bot.on("new_chat_members", Telegraf.groupChat(context => {
     var reply = hellos[Math.floor(Math.random()*hellos.length)] + punctuations[Math.floor(Math.random()*punctuations.length)] +"\n";
     context.message.new_chat_members.forEach((new_chat_member) => {
         if(new_chat_member.username != undefined){
-            reply += (" @"+new_chat_member.username);
-        } else if(new_chat_member.first_name != undefined){
-            reply += (" @"+new_chat_member.first_name);
+            reply += ("@"+new_chat_member.username+" ");
         }
     });
+    reply += "\n\nWelcome to the Coin Sack Telegram! We're so glad you're here."
     context.reply(reply);
 }));
 
