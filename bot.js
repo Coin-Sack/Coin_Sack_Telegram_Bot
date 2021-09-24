@@ -5,8 +5,13 @@ const { Telegraf } = require('telegraf');
 const cron = require('node-cron');
 
 
-const LOG = function(message) {
-    console.log((new Date()).toUTCString() + "    " + message.toString());
+const LOG = function(command, context=undefined) {
+    console.log("> " + (new Date()).toUTCString() + "   " + command.toString());
+    if(context != undefined) {
+        console.log("        from: " + context.message.from.username);
+        console.log("        chat: " + context.message.chat.type + " " + context.message.chat.id);
+    }
+    console.log("\n");
 }
 
 
@@ -15,71 +20,60 @@ const bot = new Telegraf(fs.readFileSync('.bottoken').toString());
 let contextsGettingUpdates = [];
 
 
-// Global Bot Commands
-bot.command('about', async function(context) {
-    context.replyWithMarkdown(fs.readFileSync('./replies/about.md').toString());
-})
-bot.command('website', async function(context) {
-    context.reply(fs.readFileSync('./replies/website.txt').toString());
-});
-bot.command('whitepaper', async function(context) {
-    context.reply(fs.readFileSync('./replies/whitepaper.txt').toString());
-});
-bot.command('roadmap', async function(context) {
-    context.reply(fs.readFileSync('./replies/roadmap.txt').toString());
-});
-bot.command('instagram', async function(context) {
-    context.reply(fs.readFileSync('./replies/instagram.txt').toString());
-});
-bot.command('twitter', async function(context) {
-    context.reply(fs.readFileSync('./replies/twitter.txt').toString());
-});
-bot.command('github', async function(context) {
-    context.reply(fs.readFileSync('./replies/github.txt').toString());
-});
-bot.command('token', async function(context) {
-    context.reply(fs.readFileSync('./replies/token.txt').toString());
-});
-bot.command('price', async function(context) {
-    context.reply(fs.readFileSync('./replies/price.txt').toString());
-});
-bot.command('contract', async function(context) {
-    context.reply(fs.readFileSync('./replies/contract.txt').toString());
-});
-bot.command('issue', async function(context) {
-    context.reply(fs.readFileSync('./replies/issue.txt').toString());
-});
-
-
-// Group Chat Specific Bot Commands
 Telegraf.groupChat([
+    bot.command('about', async function(context) {
+        LOG("/about", context);
+        context.replyWithMarkdown(fs.readFileSync('./replies/about.md').toString());
+    }),
+    bot.command('website', async function(context) {
+        LOG("/website", context);
+        context.replyWithMarkdown(fs.readFileSync('./replies/website.md').toString());
+    }),
+    bot.command('whitepaper', async function(context) {
+        LOG("/whitepaper", context);
+        context.replyWithMarkdown(fs.readFileSync('./replies/whitepaper.md').toString());
+    }),
+    bot.command('roadmap', async function(context) {
+        LOG("/roadmap", context);
+        context.replyWithMarkdown(fs.readFileSync('./replies/roadmap.md').toString());
+    }),
+    bot.command('token', async function(context) {
+        LOG("/token", context)
+        context.replyWithMarkdown(fs.readFileSync('./replies/token.md').toString());
+    }),
+    bot.command('price', async function(context) {
+        LOG("/price", context);
+        context.replyWithMarkdown(fs.readFileSync('./replies/price.md').toString());
+    }),
     bot.command('socials', async function(context) {
-        context.reply(fs.readFileSync('./replies/group/socials.txt').toString());
+        LOG("/socials", context);
+        context.replyWithMarkdown(fs.readFileSync('./replies/group/socials.md').toString());
+    }),
+    bot.command('instagram', async function(context) {
+        LOG("/instagam", context);
+        context.reply(fs.readFileSync('./replies/instagram.md').toString());
+    }),
+    bot.command('twitter', async function(context) {
+        LOG("/twitter", context);
+        context.replyWithMarkdown(fs.readFileSync('./replies/twitter.md').toString());
+    }),
+    bot.command('github', async function(context) {
+        LOG("/github", context);
+        context.replyWithMarkdown(fs.readFileSync('./replies/github.md').toString());
     }),
     bot.command('commands', async function(context) {
-        context.reply(fs.readFileSync('./replies/group/commands.txt').toString());
+        LOG("/commands", context);
+        context.replyWithMarkdown(fs.readFileSync('./replies/group/commands.md').toString());
     }),
-    
-]);
-
-
-// Private Chat Specific Bot Commands
-Telegraf.privateChat([
-    bot.command('socials', async function(context) {
-        context.reply(fs.readFileSync('./replies/private/socials.txt').toString());
-    }),
-    bot.command('tetegram', async function(context) {
-        context.reply(fs.readFileSync('./replies/private/telegram.txt').toString());
-    }),
-    bot.command('commands', async function(context) {
-        context.reply(fs.readFileSync('./replies/private/commands.txt').toString());
+    bot.command('issue', async function(context) {
+        LOG("/issue", context)
+        context.replyWithMarkdown(fs.readFileSync('./replies/issue.md').toString());
     })
 ]);
 
-
-// Chat Admin / Creator Bot Commands
 Telegraf.admin([
     bot.command('start', async function(context) {
+        LOG("/start", context);
         var isContextGettingUpdates = false;
         contextsGettingUpdates.forEach(contextGettingUpdates => {
             if(contextGettingUpdates.message.chat.id == context.message.chat.id){
@@ -88,10 +82,11 @@ Telegraf.admin([
         });
         if(!isContextGettingUpdates){
             contextsGettingUpdates.push(context);
-            context.reply(fs.readFileSync('./replies/admin/start-updates.txt'));
+            context.replyWithMarkdown(fs.readFileSync('./replies/admin/start-updates.md'));
         }
     }),
     bot.command('stop', async function(context) {
+        LOG("/stop", context);
         var isContextGettingUpdates = false;
         var contextGettingUpdatesIndex = 0;
         contextsGettingUpdates.forEach((contextGettingUpdates, index) => {
@@ -102,13 +97,13 @@ Telegraf.admin([
         });
         if(isContextGettingUpdates){
             contextsGettingUpdates.splice(contextGettingUpdatesIndex, 1);
-            context.reply(fs.readFileSync('./replies/admin/stop-updates.txt'));
+            context.replyWithMarkdown(fs.readFileSync('./replies/admin/stop-updates.md'));
         }
     })
 ]);
 
 const sendContextUpdates = function() {
-    LOG("Send Scheduled Updates");
+    LOG("schedule recurring updates");
     var possibleUpdates = [];
     fs.readirSync('./updates').forEach((updateFile) => {
         possibleUpdates.push(updateFile);
@@ -118,7 +113,7 @@ const sendContextUpdates = function() {
     var updateText = fs.readFileSync(chosenUpdate).toString();
     contextsGettingUpdates.forEach((context) => {
         setTimeout(() => {
-            context.telegram.sendMessage(context.message.chat.id, updateText);
+            context.replyWithMarkdown(updateText);
         }, Math.random()*1000*60*20);
     });
 }
@@ -131,4 +126,4 @@ process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
 
 bot.launch();
-LOG("Start Telegram Bot");
+LOG("start bot");

@@ -11,9 +11,8 @@ Here is a list of my commands!
 /twitter - get a link to the Coin Sack Twitter
 /github - get a link to the Coin Sack GitHub
 
-/token - view the address of the CS token on the BSC Mainnet
+/token - view the CS token on the BSC Mainnet
 /price - get the current price of the CS token
-/contract - view the Coin Sack smart contract & source code
 
 /commands - view a list of my commands
 /help - get detailed instructions regarding my usage

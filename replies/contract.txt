@@ -1,5 +1,0 @@
-View the Coin Sack smart contract deployed on the BSC Mainnet!
-
-View contract on BSCScan: https://bscscan.com/address/0x125Ce3f13950C5fA94397927F88C352FdED680Ad
-
-View source code on GitHub: https://github.com/Coin-Sack/Coin_Sack_Token
