@@ -39,7 +39,7 @@ Telegraf.groupChat([
     }),
     bot.command('socials', async function(context) {
         LOG("/socials", context);
-        context.replyWithMarkdown(fs.readFileSync('./replies/group/socials.md').toString());
+        context.replyWithMarkdown(fs.readFileSync('./replies/socials.md').toString());
     }),
     bot.command('instagram', async function(context) {
         LOG("/instagam", context);
@@ -55,7 +55,7 @@ Telegraf.groupChat([
     }),
     bot.command('commands', async function(context) {
         LOG("/commands", context);
-        context.replyWithMarkdown(fs.readFileSync('./replies/group/commands.md').toString());
+        context.replyWithMarkdown(fs.readFileSync('./replies/commands.md').toString());
     }),
     bot.command('issue', async function(context) {
         LOG("/issue", context)
@@ -75,7 +75,7 @@ Telegraf.admin([
         });
         if(!isContextGettingUpdates){
             contextsGettingUpdates.push(context);
-            context.replyWithMarkdown(fs.readFileSync('./replies/admin/start-updates.md'));
+            context.replyWithMarkdown(fs.readFileSync('./replies/start.md'));
         }
     }),
     bot.command('stop', async function(context) {
@@ -90,7 +90,7 @@ Telegraf.admin([
         });
         if(isContextGettingUpdates){
             contextsGettingUpdates.splice(contextGettingUpdatesIndex, 1);
-            context.replyWithMarkdown(fs.readFileSync('./replies/admin/stop-updates.md'));
+            context.replyWithMarkdown(fs.readFileSync('./replies/stop.md'));
         }
     })
 ]);
