@@ -28,7 +28,11 @@ const sendContextUpdates = function() {
     var updateText = fs.readFileSync(chosenUpdate).toString();
     contextsGettingUpdates.forEach((context) => {
         setTimeout(() => {
-            context.replyWithMarkdown(updateText);
+            try {
+                context.replyWithMarkdown(updateText);
+            } catch(err) {
+                console.log(err);
+            }
         }, Math.random()*1000*60*20);
     });
 }
