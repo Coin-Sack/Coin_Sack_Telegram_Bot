@@ -3,11 +3,13 @@
 const fs = require('fs');
 const { Telegraf } = require('telegraf');
 const cron = require('node-cron');
-const { send } = require('process');
 
-const bot = new Telegraf(process.env.BOT_TOKEN);
+
+const bot = new Telegraf(fs.readFileSync('.bottoken').toString());
+
 
 let updateContexts = [];
+
 
 bot.command('about', context => {
     context.reply(fs.readFileSync('./replies/about.txt').toString());
@@ -58,11 +60,31 @@ bot.command('introduce', context => {
 });
 
 bot.command('start', context => {
-    
+    var isContextGettingUpdates = false;
+    updateContexts.forEach((updateContext) => {
+        if(context.message.chat.id == updateContext.message.chat.id){
+            isContextGettingUpdates = true;
+        }
+    });
+
+    if(!isContextGettingUpdates) {
+        updateContexts.push(context);
+        context.reply(fs.readFileSync('./replies/start.txt').toString());
+    }
 });
 
 bot.command('stop', context => {
+    var isContextGettingUpdates = false;
+    updateContexts.forEach((updateContext, index) => {
+        if(context.message.chat.id == updateContext.message.chat.id){
+            isContextGettingUpdates = true;
+            updateContexts.splice(index, 1);
+        }
+    });
 
+    if(isContextGettingUpdates) {
+        context.reply(fs.readFileSync('./replies/stop.txt').toString());
+    }
 });
 
 bot.command("commands", context => {
@@ -98,3 +120,5 @@ cron.schedule('27 12,15 * * *', sendContextUpdates);
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
+
+console.log('Coin Sack Bot is running...');
