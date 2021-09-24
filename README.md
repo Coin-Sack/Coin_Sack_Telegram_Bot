@@ -92,7 +92,7 @@ Group chat administrator commands use the `Telegraf.admim()` middleware preventi
 
 Private chat commands use the `Telegraf.privateChat()` middleware to ensure that private chat commands recieve the correct replies.
 
-Automatic recurring updates are scheduled using `node-cron` with the following CRON schedule set: `5 7,10,13,16,19,22 * * *`. Updates to each recieving chat are sent after a an additional random delay timeout of between 0 and 20 minuites from when the CRON task triggers. Update content is picked randomly from avalible updates in such a way as to prevent the same update from being sent back to back.
+Automatic recurring updates are scheduled using `node-cron`. Update content is picked randomly from avalible updates in such a way as to prevent the same update from being sent back to back.
 
 Process listeners for `SIGINT` and `SIGTERM` are setup to gracefully deal with application shutdowns.
 
