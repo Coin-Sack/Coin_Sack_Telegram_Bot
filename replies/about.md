@@ -21,4 +21,5 @@ CS token features:
 
 Coin Sack is currently in its pre-presale phase and is not yet avalible for purchase or swap. Presale rates, caps, and dates are not yet finalized and will be announced early-October.
 
-Learn more online at [Coin-Sack.com](https://coin-sack.com/) or [read the whitepaper](https://www.coin-sack.com/whitepaper/)!
+
+Learn more online at [Coin-Sack.com](https://coin-sack.com/) or [read the project whitepaper](https://www.coin-sack.com/whitepaper/)!
