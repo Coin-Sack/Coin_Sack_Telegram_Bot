@@ -8,7 +8,6 @@ const cron = require('node-cron');
 const LOG = function(command, context=undefined) {
     console.log("> " + (new Date()).toUTCString() + "   " + command.toString());
     if(context != undefined) {
-        console.log("        from: " + context.from.username);
         console.log("        chat: " + context.message.chat.type + " " + context.message.chat.id);
     }
     console.log("\n");
