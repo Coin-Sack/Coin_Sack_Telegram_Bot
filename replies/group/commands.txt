@@ -1,4 +1,4 @@
-Here is a list of my commands:
+Here is a list of my commands!
 
 /about - view up to date, general project information
 /website - get a link to the project's website
@@ -15,9 +15,6 @@ Here is a list of my commands:
 /price - get the current price of the CS token
 /contract - view the Coin Sack smart contract & source code
 
-/introduce - have me introduce myself and what I do
-/start - start my automatic updates in a chat
-/stop - stop my automatic updates within a chat
-
 /commands - view a list of my commands
+/help - get detailed instructions regarding my usage
 /issue - submit a feature request or bug report for my development

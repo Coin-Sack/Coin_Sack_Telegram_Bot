@@ -11,10 +11,7 @@ COPY package*.json ./
 RUN npm install
 
 # Copy app files
-COPY replies ./
-COPY updates ./
-COPY .bottoken ./
-COPY bot.js ./
+COPY . . 
 
 # Start App
 CMD ["npm", "run", "start"]
