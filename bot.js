@@ -95,7 +95,7 @@ Telegraf.admin([
     })
 ]);
 
-
+let lastChosenUpdate = undefined;
 const sendContextUpdates = function() {
     LOG("schedule recurring updates");
     var possibleUpdates = [];
@@ -103,7 +103,10 @@ const sendContextUpdates = function() {
         possibleUpdates.push(updateFile);
     });
 
-    var chosenUpdate = possibleUpdates[Math.floor(Math.random()*possibleUpdates.length)];
+    var chosenUpdate = undefined; 
+    while(chosenUpdate == undefined || chosenUpdate == lastChosenUpdate){
+        chosenUpdate = possibleUpdates[Math.floor(Math.random()*possibleUpdates.length)];
+    }
     var updateText = fs.readFileSync(chosenUpdate).toString();
     contextsGettingUpdates.forEach((context) => {
         setTimeout(() => {
@@ -111,7 +114,6 @@ const sendContextUpdates = function() {
         }, Math.random()*1000*60*20);
     });
 }
-
 cron.schedule('5 7,10,13,16,19,22 * * *', sendContextUpdates);
 
 
