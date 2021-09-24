@@ -1,0 +1,10 @@
+Coin Sack Updates
+
+- Custom smart contract built and deployed on the BSC Mainnet
+- Website live at https://coin-sack.com
+- Whitepaper released at https://coin-sack.com/whitepaper
+- Presale rate, caps, dates not yet set; aiming for mid-October start
+- Currently working to build community prior to presale
+
+Stay tuned for new updates to come!
+
