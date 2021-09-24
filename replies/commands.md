@@ -10,8 +10,7 @@
 /twitter - get a link to the Coin Sack Twitter
 /github - get a link to the Coin Sack GitHub
 
-/token - view the CS token on the BSC Mainnet
-/price - get the current price of the CS token
+/contract - view the CS token on the BSC Mainnet
 
 /commands - view a list of my commands
 /issue - submit a feature request or bug report for my development
