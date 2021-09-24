@@ -32,6 +32,7 @@ const sendContextUpdates = function() {
 cron.schedule('5 7,10,13,16,19,22 * * *', sendContextUpdates);
 
 
+// Group Chat Bot Commands
 bot.command('about', Telegraf.groupChat(context => {
     context.replyWithMarkdown(fs.readFileSync('./replies/about.md').toString());
 }));
@@ -73,7 +74,7 @@ bot.command('issue', Telegraf.groupChat(context => {
 }));
 
 
-
+// Chat Admin Bot Commands
 bot.command('start', Telegraf.admin(context => {
     var isContextGettingUpdates = false;
     contextsGettingUpdates.forEach(contextGettingUpdates => {
@@ -83,8 +84,8 @@ bot.command('start', Telegraf.admin(context => {
     });
     if(!isContextGettingUpdates){
         contextsGettingUpdates.push(context);
-        context.replyWithMarkdown(fs.readFileSync('./replies/start.md').toString());
     }
+    context.replyWithMarkdown(fs.readFileSync('./replies/start.md').toString());
 }));
 
 bot.command('stop', Telegraf.admin(context => {
@@ -98,12 +99,51 @@ bot.command('stop', Telegraf.admin(context => {
     });
     if(isContextGettingUpdates){
         contextsGettingUpdates.splice(contextGettingUpdatesIndex, 1);
-        context.replyWithMarkdown(fs.readFileSync('./replies/stop.md').toString());
     }
+    context.replyWithMarkdown(fs.readFileSync('./replies/stop.md').toString());
 }));
 
 
+// Private Chat Commands
+bot.command('start', Telegraf.privateChat(context => {
+    var isContextGettingUpdates = false;
+    contextsGettingUpdates.forEach(contextGettingUpdates => {
+        if(contextGettingUpdates.message.chat.id == context.message.chat.id){
+            isContextGettingUpdates = true;
+        }
+    });
+    if(!isContextGettingUpdates){
+        contextsGettingUpdates.push(context);
+    }
+    context.replyWithMarkdown(fs.readFileSync('./replies/start.md').toString());
+}));
+
+bot.command('stop', Telegraf.privateChat(context => {
+    var isContextGettingUpdates = false;
+    var contextGettingUpdatesIndex = 0;
+    contextsGettingUpdates.forEach((contextGettingUpdates, index) => {
+        if(contextGettingUpdates.message.chat.id == context.message.chat.id){
+            isContextGettingUpdates = true;
+            contextGettingUpdatesIndex = index;
+        }
+    });
+    if(isContextGettingUpdates){
+        contextsGettingUpdates.splice(contextGettingUpdatesIndex, 1);
+    }
+    context.replyWithMarkdown(fs.readFileSync('./replies/stop.md').toString());
+}));
+
+
+// ACL Bot Commands
+bot.command('update', Telegraf.acl([1769755690], context => {
+
+}));
+
+
+// Gracefully Deal With Stops
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
+
+// Launch Bot
 bot.launch();
