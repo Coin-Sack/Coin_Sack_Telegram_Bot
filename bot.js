@@ -15,24 +15,22 @@ bot.use(Telegraf.log());
 // Handle Recurring Updates
 let contextsGettingUpdates = [];
 let lastChosenUpdate = undefined;
-const sendContextUpdates = function() {
-    var possibleUpdates = [];
-    fs.readirSync('./updates').forEach((updateFile) => {
-        possibleUpdates.push(updateFile);
-    });
-
+let possibleUpdates = [];
+fs.readdirSync('./updates').forEach((updateFile) => {
+    console.log(updateFile.toString())
+    possibleUpdates.push(updateFile.toString());
+});
+cron.schedule('35 * * * *', () => {
     var chosenUpdate = undefined; 
     do {
         chosenUpdate = possibleUpdates[Math.floor(Math.random()*possibleUpdates.length)];
-    } while(chosenUpdate == lastChosenUpdate)
-
+    } while(chosenUpdate == lastChosenUpdate);
     lastChosenUpdate = chosenUpdate;
     var updateText = fs.readFileSync('./updates/' + chosenUpdate).toString();
-    contextsGettingUpdates.forEach((context) => {
+    contextsGettingUpdates.forEach(context => {
         context.telegram.sendMessage(context.message.chat.id, updateText);
     });
-}
-cron.schedule('5 9,12,15,18,21,23 * * *', sendContextUpdates);
+});
 
 
 // Group Chat Commands
@@ -77,6 +75,34 @@ bot.command('issue', Telegraf.groupChat(context => {
 }));
 
 
+// Group Chat Event Handlers
+bot.on("new_chat_members", Telegraf.groupChat(context => {
+    const hellos = ["Hello", "Hi", "Howdy", "Bonjour", "Salut", "Hello there", "Hola", "Guten Tag", "Namaste", "Shalom", "Hi there", "Greetings", "Wassuh dude", "Wassuh bruh"];
+    const punctuations = ["!", String.fromCodePoint(0x1F600), String.fromCodePoint(0x1F603), String.fromCodePoint(0x1F604), String.fromCodePoint(0x1F601), String.fromCodePoint(0x1F642), String.fromCodePoint(0x1F60A)];
+    var reply = hellos[Math.floor(Math.random()*hellos.length)] + punctuations[Math.floor(Math.random()*punctuations.length)] +"\n";
+    context.message.new_chat_members.forEach((new_chat_member) => {
+        if(new_chat_member.username != undefined){
+            reply += (" @"+new_chat_member.username);
+        } else if(new_chat_member.first_name != undefined){
+            reply += (" @"+new_chat_member.first_name);
+        }
+    });
+    context.reply(reply);
+}));
+
+//bot.on("voice_chat_scheduled", Telegraf.groupChat(context => {
+
+//}));
+
+//bot.on("voice_chat_started", Telegraf.groupChat(context => {
+
+//}));
+
+//bot.on("voice_chat_ended", Telegraf.groupChat(context => {
+
+//}));
+
+
 // Group Chat Admin Commands
 bot.command('startupdates', Telegraf.admin(context => {
     var isContextGettingUpdates = false;
@@ -89,6 +115,7 @@ bot.command('startupdates', Telegraf.admin(context => {
         contextsGettingUpdates.push(context);
     }
     context.replyWithMarkdown(fs.readFileSync('./replies/start.md').toString());
+    console.log(contextsGettingUpdates);
 }));
 
 bot.command('stopupdates', Telegraf.admin(context => {
@@ -119,6 +146,7 @@ bot.command('startupdates', Telegraf.privateChat(context => {
         contextsGettingUpdates.push(context);
     }
     context.replyWithMarkdown(fs.readFileSync('./replies/start.md').toString());
+    console.log(contextsGettingUpdates);
 }));
 
 bot.command('stopupdates', Telegraf.privateChat(context => {
@@ -141,6 +169,10 @@ bot.command('stopupdates', Telegraf.privateChat(context => {
 //bot.help(context => {
 //    context.replyWithMarkdown(fs.readFileSync('./replies/help.md').toString());
 //});
+
+
+
+
 
 
 // Launch Bot
