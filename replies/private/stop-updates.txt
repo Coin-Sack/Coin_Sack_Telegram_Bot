@@ -1,3 +1,0 @@
-Automatic Coin Sack updates have been disabled for this group. 
-
-A group administrator can the command /start-updates to begin them again!

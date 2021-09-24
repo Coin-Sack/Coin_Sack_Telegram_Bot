@@ -1,6 +1,5 @@
-The Coin Sack Smart Contract:
+View the Coin Sack smart contract deployed on the BSC Mainnet!
 
-Deployed on the BSC Mainnet at address 0x125Ce3f13950C5fA94397927F88C352FdED680Ad
+View contract on BSCScan: https://bscscan.com/address/0x125Ce3f13950C5fA94397927F88C352FdED680Ad
 
-View deployed contract on BSCScan: https://bscscan.com/address/0x125Ce3f13950C5fA94397927F88C352FdED680Ad
 View source code on GitHub: https://github.com/Coin-Sack/Coin_Sack_Token

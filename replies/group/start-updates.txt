@@ -1,3 +1,0 @@
-Automatic Coin Sack updates have been enabled for this group!
-
-A group admininistrator can use the command /stop-updates to stop automatic updates.

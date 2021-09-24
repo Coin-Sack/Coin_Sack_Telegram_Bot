@@ -16,8 +16,8 @@ Here is a list of my commands!
 /price - get the current price of the CS token
 /contract - view the Coin Sack smart contract & source code
 
-/start-updates - start my automatic updates in this chat
-/stop-updates - stop my automatic updates in this
+/start - start my recurring automatic updates
+/stop - stop my recurring automatic updates
 
 /commands - view a list of my commands
 /help - get detailed instructions regarding my usage
