@@ -22,22 +22,17 @@ const sendContextUpdates = function() {
     });
 
     var chosenUpdate = undefined; 
-    while(chosenUpdate == undefined || chosenUpdate == lastChosenUpdate){
+    do {
         chosenUpdate = possibleUpdates[Math.floor(Math.random()*possibleUpdates.length)];
-    }
+    } while(chosenUpdate == lastChosenUpdate)
+
     lastChosenUpdate = chosenUpdate;
-    var updateText = fs.readFileSync(chosenUpdate).toString();
+    var updateText = fs.readFileSync('./updates/' + chosenUpdate).toString();
     contextsGettingUpdates.forEach((context) => {
-        setTimeout(() => {
-            try {
-                context.replyWithMarkdown(updateText);
-            } catch(err) {
-                console.log(err);
-            }
-        }, Math.random()*1000*60*20);
+        context.telegram.sendMessage(context.message.chat.id, updateText);
     });
 }
-cron.schedule('5 7,10,13,16,19,22 * * *', sendContextUpdates);
+cron.schedule('5 9,12,15,18,21,23 * * *', sendContextUpdates);
 
 
 // Group Chat Commands
