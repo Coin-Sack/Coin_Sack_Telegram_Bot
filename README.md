@@ -1,6 +1,6 @@
 # The Coin Sack Telegram Bot
 
-This repo contains source code for the Coin Sack project's Telegram bot (@coin_sack_bot). The bot is built on top of Node JS using the Telegraf package and is hosted within a Docker container via Microsoft Azure.
+This repo contains source code for the Coin Sack project's Telegram bot (@coin_sack_bot). The bot is built on top of Node JS using the Telegraf package.
 
 [See this bot in action... Join the Coin Sack Telegam group today!](https://t.me/joinchat/hB6xA3apOXg2ZjBh)
 
@@ -28,7 +28,11 @@ The following commands are avalible to all group members:
 * /commands - view a list of avalible commands
 * /issue - submit a bot feature request or bug report
 
+Group administrators additionally have access to these other commands for enabling / disabling automatic recurring updates:
+* /startupdates - start recieving automated project updates via private chat
+* /stopupdates - stop recieving automated project updates via private chat
 
+More group chat commands / features are currently under development. 
 
 
 ### Private Chat Features
