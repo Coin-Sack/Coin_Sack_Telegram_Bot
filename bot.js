@@ -3,6 +3,7 @@
 const fs = require('fs');
 const { Telegraf } = require('telegraf');
 const cron = require('node-cron');
+const { send } = require('process');
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
 
@@ -75,7 +76,8 @@ bot.command("issue", context => {
 
 bot.launch();
 
-cron.schedule('6 7,18,23 * * *', () => {
+
+const sendContextUpdates = function() {
     var possibleUpdates = [];
     fs.readirSync('./updates').forEach((updateFile, index) => {
         possibleUpdates.push(fs.readFileSync(updateFile).toString());
@@ -86,33 +88,11 @@ cron.schedule('6 7,18,23 * * *', () => {
     updateContexts.forEach((context) => {
         context.telegram.sendMessage(context.message.chat.id, chosenUpdate);
     });
-});
+}
 
-cron.schedule('53 10,21 * * *', () => {
-    var possibleUpdates = [];
-    fs.readirSync('./updates').forEach((updateFile, index) => {
-        possibleUpdates.push(fs.readFileSync(updateFile).toString());
-    });
-
-    var chosenUpdate = possibleUpdates[Math.floor(Math.random()*possibleUpdates.length)];
-
-    updateContexts.forEach((context) => {
-        context.telegram.sendMessage(context.message.chat.id, chosenUpdate);
-    });
-});
-
-cron.schedule('27 12,15 * * *', () => {
-    var possibleUpdates = [];
-    fs.readirSync('./updates').forEach((updateFile, index) => {
-        possibleUpdates.push(fs.readFileSync(updateFile).toString());
-    });
-
-    var chosenUpdate = possibleUpdates[Math.floor(Math.random()*possibleUpdates.length)];
-
-    updateContexts.forEach((context) => {
-        context.telegram.sendMessage(context.message.chat.id, chosenUpdate);
-    });
-});
+cron.schedule('6 7,18,23 * * *', sendContextUpdates);
+cron.schedule('53 10,21 * * *', sendContextUpdates);
+cron.schedule('27 12,15 * * *', sendContextUpdates);
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
