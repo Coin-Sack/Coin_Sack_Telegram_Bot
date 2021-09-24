@@ -40,7 +40,7 @@ bot.command("whitepaper", context => {
 })
 
 bot.command("about", context => {
-    context.reply(fs.readFileSync('./texts/about.txt').toString());
+    context.reply(fs.readFileSync('./replies/about.txt').toString());
 });
 
 bot.command("commands", context => {
@@ -50,11 +50,11 @@ bot.command("commands", context => {
 bot.launch();
 
 cron.schedule('10 3,6,9,12,15,18,21 * * *', () => {
-  botContext.telegram.sendMessage(botContext.message.chat.id, fs.readFileSync('./texts/updates.txt').toString());
+  botContext.telegram.sendMessage(botContext.message.chat.id, fs.readFileSync('./updates/1.txt').toString());
 });
 
 cron.schedule('20 4,7,10,13,16,19,22 * * *', () => {
-  botContext.telegram.sendMessage(botContext.message.chat.id, fs.readFileSync('./texts/support.txt').toString());
+  botContext.telegram.sendMessage(botContext.message.chat.id, fs.readFileSync('./updates/2.txt').toString());
 });
 
 process.once('SIGINT', () => bot.stop('SIGINT'));
