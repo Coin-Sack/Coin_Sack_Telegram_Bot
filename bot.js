@@ -16,7 +16,6 @@ bot.use(Telegraf.log());
 let contextsGettingUpdates = [];
 let lastChosenUpdate = undefined;
 const sendContextUpdates = function() {
-    LOG("schedule recurring updates");
     var possibleUpdates = [];
     fs.readirSync('./updates').forEach((updateFile) => {
         possibleUpdates.push(updateFile);
@@ -36,7 +35,7 @@ const sendContextUpdates = function() {
 cron.schedule('5 7,10,13,16,19,22 * * *', sendContextUpdates);
 
 
-// Bot Commands
+// Group Chat Commands
 bot.command('about', Telegraf.groupChat(context => {
     context.replyWithMarkdown(fs.readFileSync('./replies/about.md').toString());
 }));
@@ -78,7 +77,8 @@ bot.command('issue', Telegraf.groupChat(context => {
 }));
 
 
-bot.command('start', Telegraf.admin(context => {
+// Group Chat Admin Commands
+bot.command('startupdates', Telegraf.admin(context => {
     var isContextGettingUpdates = false;
     contextsGettingUpdates.forEach(contextGettingUpdates => {
         if(contextGettingUpdates.message.chat.id == context.message.chat.id){
@@ -91,7 +91,7 @@ bot.command('start', Telegraf.admin(context => {
     context.replyWithMarkdown(fs.readFileSync('./replies/start.md').toString());
 }));
 
-bot.command('stop', Telegraf.admin(context => {
+bot.command('stopupdates', Telegraf.admin(context => {
     var isContextGettingUpdates = false;
     var contextGettingUpdatesIndex = 0;
     contextsGettingUpdates.forEach((contextGettingUpdates, index) => {
@@ -105,6 +105,42 @@ bot.command('stop', Telegraf.admin(context => {
     }
     context.replyWithMarkdown(fs.readFileSync('./replies/stop.md').toString());
 }));
+
+
+// Private Chat Commands
+bot.command('startupdates', Telegraf.privateChat(context => {
+    var isContextGettingUpdates = false;
+    contextsGettingUpdates.forEach(contextGettingUpdates => {
+        if(contextGettingUpdates.message.chat.id == context.message.chat.id){
+            isContextGettingUpdates = true;
+        }
+    });
+    if(!isContextGettingUpdates){
+        contextsGettingUpdates.push(context);
+    }
+    context.replyWithMarkdown(fs.readFileSync('./replies/start.md').toString());
+}));
+
+bot.command('stopupdates', Telegraf.privateChat(context => {
+    var isContextGettingUpdates = false;
+    var contextGettingUpdatesIndex = 0;
+    contextsGettingUpdates.forEach((contextGettingUpdates, index) => {
+        if(contextGettingUpdates.message.chat.id == context.message.chat.id){
+            isContextGettingUpdates = true;
+            contextGettingUpdatesIndex = index;
+        }
+    });
+    if(isContextGettingUpdates){
+        contextsGettingUpdates.splice(contextGettingUpdatesIndex, 1);
+    }
+    context.replyWithMarkdown(fs.readFileSync('./replies/stop.md').toString());
+}));
+
+
+// Bot Help Command
+bot.help(context => {
+    context.replyWithMarkdown(fs.readFileSync('./replies/help.md').toString());
+});
 
 
 // Gracefully Deal With Shutdowns

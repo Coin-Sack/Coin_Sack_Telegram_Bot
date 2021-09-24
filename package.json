@@ -1,6 +1,6 @@
 {
   "name": "coin-sack-telegram-bot",
-  "version": "0.1.3",
+  "version": "0.1.7",
   "description": "The Telegram bot for the Coin Sack group.",
   "main": "bot.js",
   "scripts": {
