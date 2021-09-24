@@ -43,7 +43,7 @@ Telegraf.groupChat([
     }),
     bot.command('instagram', async function(context) {
         LOG("/instagam", context);
-        context.reply(fs.readFileSync('./replies/instagram.md').toString());
+        context.replyWithMarkdown(fs.readFileSync('./replies/instagram.md').toString());
     }),
     bot.command('twitter', async function(context) {
         LOG("/twitter", context);
@@ -75,7 +75,7 @@ Telegraf.admin([
         });
         if(!isContextGettingUpdates){
             contextsGettingUpdates.push(context);
-            context.replyWithMarkdown(fs.readFileSync('./replies/start.md'));
+            context.replyWithMarkdown(fs.readFileSync('./replies/start.md').toString());
         }
     }),
     bot.command('stop', async function(context) {
@@ -90,7 +90,7 @@ Telegraf.admin([
         });
         if(isContextGettingUpdates){
             contextsGettingUpdates.splice(contextGettingUpdatesIndex, 1);
-            context.replyWithMarkdown(fs.readFileSync('./replies/stop.md'));
+            context.replyWithMarkdown(fs.readFileSync('./replies/stop.md').toString());
         }
     })
 ]);
