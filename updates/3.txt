@@ -1,7 +1,11 @@
-Coin Sack Project Updates
+The Coin Sack Presale Opens October 17, 2021 @ 12:00 PM!
 
-The Coin Sack smart contract is deployed on the BSC Mainnet awaiting the start of a DXLaunch presale while community is built and marketing is solidified.  
+Rate: 153,846,153.845 CS per BNB
+Opens: October 17, 2021 @ 12:00 PM
+Closes: October 24, 2021 @ 11:55 AM
+Hard cap: 325 BNB
+Soft cap: 320 BNB
 
-The project is currently in its pre-presale phase. Presale rates, caps, and dates are not yet finalized and will be announced early-October.
+10% of BNB generated during the presale will be injected into the CS War Chest to provide an immediate reserve for token buybacks
 
-To learn more about what's next for Coin Sack, read our whitepaper / roadmap online at https://www.coin-sack.com/whitepaper/
+dxsale.app/app/v3/defipresale?saleID=595&chain=BSC
