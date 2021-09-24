@@ -25,6 +25,7 @@ const sendContextUpdates = function() {
     while(chosenUpdate == undefined || chosenUpdate == lastChosenUpdate){
         chosenUpdate = possibleUpdates[Math.floor(Math.random()*possibleUpdates.length)];
     }
+    lastChosenUpdate = chosenUpdate;
     var updateText = fs.readFileSync(chosenUpdate).toString();
     contextsGettingUpdates.forEach((context) => {
         setTimeout(() => {
