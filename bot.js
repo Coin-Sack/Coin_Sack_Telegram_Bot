@@ -1,15 +1,18 @@
 /* Coin Sack Telegram Bot */
 
+
+// Import Dependencies
 const fs = require('fs');
 const { Telegraf } = require('telegraf');
 const cron = require('node-cron');
-const { exit } = require('process');
 
 
+// Create Bot
 const bot = new Telegraf(fs.readFileSync('.bottoken').toString());
 bot.use(Telegraf.log());
 
 
+// Handle Recurring Updates
 let contextsGettingUpdates = [];
 let lastChosenUpdate = undefined;
 const sendContextUpdates = function() {
@@ -75,71 +78,36 @@ bot.command('issue', Telegraf.groupChat(context => {
 }));
 
 
-bot.command('start', [
-    Telegraf.admin(context => {
-        var isContextGettingUpdates = false;
-        contextsGettingUpdates.forEach(contextGettingUpdates => {
-            if(contextGettingUpdates.message.chat.id == context.message.chat.id){
-                isContextGettingUpdates = true;
-            }
-        });
-        if(!isContextGettingUpdates){
-            contextsGettingUpdates.push(context);
+bot.command('start', Telegraf.admin(context => {
+    var isContextGettingUpdates = false;
+    contextsGettingUpdates.forEach(contextGettingUpdates => {
+        if(contextGettingUpdates.message.chat.id == context.message.chat.id){
+            isContextGettingUpdates = true;
         }
-        context.replyWithMarkdown(fs.readFileSync('./replies/start.md').toString());
-    }),
-    Telegraf.privateChat(context => {
-        var isContextGettingUpdates = false;
-        contextsGettingUpdates.forEach(contextGettingUpdates => {
-            if(contextGettingUpdates.message.chat.id == context.message.chat.id){
-                isContextGettingUpdates = true;
-            }
-        });
-        if(!isContextGettingUpdates){
-            contextsGettingUpdates.push(context);
-        }
-        context.replyWithMarkdown(fs.readFileSync('./replies/start.md').toString());
-    })
-]);
+    });
+    if(!isContextGettingUpdates){
+        contextsGettingUpdates.push(context);
+    }
+    context.replyWithMarkdown(fs.readFileSync('./replies/start.md').toString());
+}));
 
-bot.command('stop', [
-    Telegraf.admin(context => {
-        var isContextGettingUpdates = false;
-        var contextGettingUpdatesIndex = 0;
-        contextsGettingUpdates.forEach((contextGettingUpdates, index) => {
-            if(contextGettingUpdates.message.chat.id == context.message.chat.id){
-                isContextGettingUpdates = true;
-                contextGettingUpdatesIndex = index;
-            }
-        });
-        if(isContextGettingUpdates){
-            contextsGettingUpdates.splice(contextGettingUpdatesIndex, 1);
+bot.command('stop', Telegraf.admin(context => {
+    var isContextGettingUpdates = false;
+    var contextGettingUpdatesIndex = 0;
+    contextsGettingUpdates.forEach((contextGettingUpdates, index) => {
+        if(contextGettingUpdates.message.chat.id == context.message.chat.id){
+            isContextGettingUpdates = true;
+            contextGettingUpdatesIndex = index;
         }
-        context.replyWithMarkdown(fs.readFileSync('./replies/stop.md').toString());
-    }),
-    Telegraf.privateChat(context => {
-        var isContextGettingUpdates = false;
-        var contextGettingUpdatesIndex = 0;
-        contextsGettingUpdates.forEach((contextGettingUpdates, index) => {
-            if(contextGettingUpdates.message.chat.id == context.message.chat.id){
-                isContextGettingUpdates = true;
-                contextGettingUpdatesIndex = index;
-            }
-        });
-        if(isContextGettingUpdates){
-            contextsGettingUpdates.splice(contextGettingUpdatesIndex, 1);
-        }
-        context.replyWithMarkdown(fs.readFileSync('./replies/stop.md').toString());
-    })
-]);
-
-bot.command('edit', Telegraf.acl([1769755690], context => {
-
+    });
+    if(isContextGettingUpdates){
+        contextsGettingUpdates.splice(contextGettingUpdatesIndex, 1);
+    }
+    context.replyWithMarkdown(fs.readFileSync('./replies/stop.md').toString());
 }));
 
 
-
-// Gracefully Deal With Stops
+// Gracefully Deal With Shutdowns
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
 
