@@ -79,15 +79,17 @@ bot.launch();
 
 const sendContextUpdates = function() {
     var possibleUpdates = [];
-    fs.readirSync('./updates').forEach((updateFile, index) => {
+    fs.readirSync('./updates').forEach((updateFile) => {
         possibleUpdates.push(fs.readFileSync(updateFile).toString());
     });
 
     var chosenUpdate = possibleUpdates[Math.floor(Math.random()*possibleUpdates.length)];
 
-    updateContexts.forEach((context) => {
-        context.telegram.sendMessage(context.message.chat.id, chosenUpdate);
-    });
+    setTimeout(() => {
+        updateContexts.forEach((context) => {
+            context.telegram.sendMessage(context.message.chat.id, chosenUpdate);
+        });
+    }, Math.random()*1000*60*20);   
 }
 
 cron.schedule('6 7,18,23 * * *', sendContextUpdates);
