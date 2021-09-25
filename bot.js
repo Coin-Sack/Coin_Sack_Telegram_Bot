@@ -99,8 +99,8 @@ bot.on("new_chat_members", Telegraf.groupChat(context => {
             reply += ("\n@"+new_chat_member.first_name+"\n");
         }
     });
-    const closers = ["Welcome to the Coin Sack Telegram! We're so glad you're here.", "We're so happy you made it here! Welcome to the Coin Sack Telegram.", "Welcome to the Coin Sack Telegram! We're so happy to see you."];
-    reply += ("\n"+closers[Math.floor(Math.random()*closers.length)]);
+    const closers = ["We're so glad you're here!", "We're so happy you made it!", "We're so happy to see you!", "It's great to have you!", "It's awesome that you're here!"];
+    reply += ("\nWelcome to the Coin Sack Telegram chat! "+closers[Math.floor(Math.random()*closers.length)]);
     context.reply(reply);
 }));
 
