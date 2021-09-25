@@ -50,6 +50,10 @@ bot.command('contract', Telegraf.groupChat(context => {
     context.replyWithMarkdown(fs.readFileSync('./replies/contract.md').toString());
 }));
 
+bot.command('token', Telegraf.groupChat(context => {
+    context.replyWithMarkdown(fs.readFileSync('./replies/contract.md').toString());
+}));
+
 bot.command('price', Telegraf.groupChat(context => {
     context.replyWithMarkdown(fs.readFileSync('./replies/price.md').toString());
 }));
@@ -85,8 +89,8 @@ bot.command('issue', Telegraf.groupChat(context => {
 
 // Group Chat Event Handlers
 bot.on("new_chat_members", Telegraf.groupChat(context => {
-    const hellos = ["Hello", "Hi", "Howdy", "Bonjour", "Salut", "Hello there", "Hola", "Guten Tag", "Namaste", "Shalom", "Hi there", "Greetings", "Wassuh dude", "Wassuh bruh"];
-    const punctuations = [String.fromCodePoint(0x1F600), String.fromCodePoint(0x1F603), String.fromCodePoint(0x1F604), String.fromCodePoint(0x1F601), String.fromCodePoint(0x1F642), String.fromCodePoint(0x1F60A)];
+    const hellos = ["Hello", "Hi", "Howdy", "Bonjour", "Salut", "Hello there", "Hola", "Guten Tag", "Namaste", "Shalom", "Hi there", "Greetings", "Wassuh dude", "Wassuh bruh", "Heyo", "Hey there", "Yo", "Sup", "Hey"];
+    const punctuations = [String.fromCodePoint(0x1F600), String.fromCodePoint(0x1F603), String.fromCodePoint(0x1F604), String.fromCodePoint(0x1F601), String.fromCodePoint(0x1F642), String.fromCodePoint(0x1F60A), String.fromCodePoint(0x1F920), String.fromCodePoint(0x1F60E), String.fromCodePoint(0x1F913), String.fromCodePoint(0x1F919), String.fromCodePoint(0x1F44B)];
     var reply = hellos[Math.floor(Math.random()*hellos.length)] + " " + punctuations[Math.floor(Math.random()*punctuations.length)] +"\n";
     context.message.new_chat_members.forEach((new_chat_member) => {
         if(new_chat_member.username != undefined){
@@ -95,7 +99,8 @@ bot.on("new_chat_members", Telegraf.groupChat(context => {
             reply += ("\n@"+new_chat_member.first_name+"\n");
         }
     });
-    reply += "\nWelcome to the Coin Sack Telegram! We're so glad you're here."
+    const closers = ["Welcome to the Coin Sack Telegram! We're so glad you're here.", "We're so happy you made it here! Welcome to the Coin Sack Telegram.", "Welcome to the Coin Sack Telegram! We're so happy to see you."];
+    reply += ("\n"+closers[Math.floor(Math.random()*closers.length)]);
     context.reply(reply);
 }));
 
@@ -171,6 +176,10 @@ bot.command('stop', Telegraf.privateChat(context => {
     context.replyWithMarkdown(fs.readFileSync('./replies/stop.md').toString());
 }));
 
+
+bot.help(context => {
+    context.replyWithMarkdown(fs.readFileSync('./replies/commands.md').toString());
+});
 
 // Launch Bot
 bot.launch();

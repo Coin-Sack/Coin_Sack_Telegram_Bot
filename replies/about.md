@@ -19,7 +19,10 @@ CS token features:
 - Doxed, trustworthy team
 
 
-Coin Sack is currently in its pre-presale phase and is not yet avalible for purchase or swap. Presale rates, caps, and dates are not yet finalized and will be announced early-October.
+_The Coin Sack Presale Opens October 17, 2021 @ 12:00 PM!_
 
+Presale Rate: 153,846,153.845 CS per BNB
+Presale Opens: October 17, 2021 @ 12:00 PM
+Presale Closes: October 24, 2021 @ 11:55 AM
 
 Learn more online at [Coin-Sack.com](https://coin-sack.com/) or [read the project whitepaper](https://www.coin-sack.com/whitepaper/)!
