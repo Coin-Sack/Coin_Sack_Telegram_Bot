@@ -20,7 +20,7 @@ fs.readdirSync('./updates').forEach((updateFile) => {
     console.log(updateFile.toString())
     possibleUpdates.push(updateFile.toString());
 });
-let contextUpdatesTask = cron.schedule('25 */3 * * *', () => {
+cron.schedule('25 */3 * * *', () => {
     var chosenUpdate = undefined; 
     do {
         chosenUpdate = possibleUpdates[Math.floor(Math.random()*possibleUpdates.length)];
