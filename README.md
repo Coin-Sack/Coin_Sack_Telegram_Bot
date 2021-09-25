@@ -18,19 +18,24 @@ This repo contains source code for the Coin Sack project's Telegram bot (@coin_s
 
 The following commands are avalible to all group members:
 * /about - view up to date, general project information
-* /website - get a link to the project's website
+* /tokenomics - get details about Coin Sack tokenomics
 * /whitepaper - download & read the project's whitepaper
-* /contract - view the CS smart contract on the BSC Mainnet
+* /roadmap - view the project's roadmap & current progress
+* /values - see this projects core values & goals
+* /contract or /token - view the CS smart contract on the BSC Mainnet
+* /price - see the CS token's current price
+* /presale - get a link to the CS presale on DXLaunch
+* /website - get a link to the project's website
 * /socials - get a list of all Coin Sack social medias
 * /instagram - get a link to the Coin Sack Instagram
 * /twitter - get a link to the Coin Sack Twitter
 * /github - get a link to the Coin Sack GitHub
-* /commands - view a list of avalible commands
+* /commands or /help - view a list of avalible commands
 * /issue - submit a bot feature request or bug report
 
 Group administrators additionally have access to these other commands for enabling / disabling automatic recurring updates:
-* /startupdates - start recieving automated project updates via private chat
-* /stopupdates - stop recieving automated project updates via private chat
+* /start - start recieving automated project updates via private chat
+* /stop - stop recieving automated project updates via private chat
 
 More group chat commands / features are currently under development. 
 
@@ -39,8 +44,8 @@ More group chat commands / features are currently under development.
 Any Telegram user can directly open up a private chat with @coin_sack_bot to get information about or recurring updates regarding Coin Sack. 
 
 The following commands are avalible to private chat users:
-* /startupdates - start recieving automated project updates via private chat
-* /stopupdates - stop recieving automated project updates via private chat
+* /start - start recieving automated project updates via private chat
+* /stop - stop recieving automated project updates via private chat
 
 More private commands / features are currently under development.
 
