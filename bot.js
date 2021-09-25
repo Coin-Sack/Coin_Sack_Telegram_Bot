@@ -20,15 +20,15 @@ fs.readdirSync('./updates').forEach((updateFile) => {
     console.log(updateFile.toString())
     possibleUpdates.push(updateFile.toString());
 });
-cron.schedule('25 */3 * * *', () => {
+let contextUpdatesTask = cron.schedule('25 */3 * * *', () => {
     var chosenUpdate = undefined; 
     do {
         chosenUpdate = possibleUpdates[Math.floor(Math.random()*possibleUpdates.length)];
     } while(chosenUpdate == lastChosenUpdate);
     lastChosenUpdate = chosenUpdate;
-    var updateText = fs.readFileSync('./updates/' + chosenUpdate).toString();
+    var updateMarkdown = fs.readFileSync('./updates/' + chosenUpdate).toString();
     contextsGettingUpdates.forEach(context => {
-        context.telegram.sendMessage(context.message.chat.id, updateText);
+        context.replyWithMarkdown(updateMarkdown);
     });
 });
 
@@ -38,12 +38,24 @@ bot.command('about', Telegraf.groupChat(context => {
     context.replyWithMarkdown(fs.readFileSync('./replies/about.md').toString());
 }));
 
+bot.command('tokenomics', Telegraf.groupChat(context => {
+    context.replyWithMarkdown(fs.readFileSync('./replies/tokenomics.md').toString());
+}));
+
 bot.command('website', Telegraf.groupChat(context => {
     context.replyWithMarkdown(fs.readFileSync('./replies/website.md').toString());
 }));
 
 bot.command('whitepaper', Telegraf.groupChat(context => {
     context.replyWithMarkdown(fs.readFileSync('./replies/whitepaper.md').toString());
+}));
+
+bot.command('roadmap', Telegraf.groupChat(context => {
+    context.replyWithMarkdown(fs.readFileSync('./replies/roadmap.md').toString());
+}));
+
+bot.command('values', Telegraf.groupChat(context => {
+    context.replyWithMarkdown(fs.readFileSync('./replies/values.md').toString());
 }));
 
 bot.command('contract', Telegraf.groupChat(context => {
@@ -86,6 +98,9 @@ bot.command('issue', Telegraf.groupChat(context => {
     context.replyWithMarkdown(fs.readFileSync('./replies/issue.md').toString());
 }));
 
+bot.help(Telegraf.groupChat(context => {
+    context.replyWithMarkdown(fs.readFileSync('./replies/commands.md').toString());
+}));
 
 // Group Chat Event Handlers
 bot.on("new_chat_members", Telegraf.groupChat(context => {
@@ -103,18 +118,6 @@ bot.on("new_chat_members", Telegraf.groupChat(context => {
     reply += ("\nWelcome to the Coin Sack Telegram chat! "+closers[Math.floor(Math.random()*closers.length)]);
     context.reply(reply);
 }));
-
-//bot.on("voice_chat_scheduled", Telegraf.groupChat(context => {
-
-//}));
-
-//bot.on("voice_chat_started", Telegraf.groupChat(context => {
-
-//}));
-
-//bot.on("voice_chat_ended", Telegraf.groupChat(context => {
-
-//}));
 
 
 // Group Chat Admin Commands
@@ -177,9 +180,7 @@ bot.command('stop', Telegraf.privateChat(context => {
 }));
 
 
-bot.help(context => {
-    context.replyWithMarkdown(fs.readFileSync('./replies/commands.md').toString());
-});
+
 
 // Launch Bot
 bot.launch();
