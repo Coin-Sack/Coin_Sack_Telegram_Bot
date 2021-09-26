@@ -104,18 +104,22 @@ bot.help(Telegraf.groupChat(context => {
 
 // Group Chat Event Handlers
 bot.on("new_chat_members", Telegraf.groupChat(context => {
-    const hellos = ["Hello", "Hi", "Howdy", "Bonjour", "Salut", "Hello there", "Hola", "Guten Tag", "Namaste", "Shalom", "Hi there", "Greetings", "Wassuh dude", "Wassuh bruh", "Heyo", "Hey there", "Yo", "Sup", "Hey"];
+    const hellos = ["Hello", "Hi", "Howdy", "Bonjour", "Salut", "Hello there", "Hola", "Guten Tag", "Namaste", "Shalom", "Hi there", "Greetings", "Wassuh", "Heyo", "Hey there", "Yo", "Sup", "Hey"];
     const punctuations = [String.fromCodePoint(0x1F600), String.fromCodePoint(0x1F603), String.fromCodePoint(0x1F604), String.fromCodePoint(0x1F601), String.fromCodePoint(0x1F642), String.fromCodePoint(0x1F60A), String.fromCodePoint(0x1F920), String.fromCodePoint(0x1F60E), String.fromCodePoint(0x1F913), String.fromCodePoint(0x1F919), String.fromCodePoint(0x1F44B)];
-    var reply = hellos[Math.floor(Math.random()*hellos.length)] + " " + punctuations[Math.floor(Math.random()*punctuations.length)] +"\n";
+    var reply = hellos[Math.floor(Math.random()*hellos.length)] + " "; 
     context.message.new_chat_members.forEach((new_chat_member) => {
         if(new_chat_member.username != undefined){
-            reply += ("\n@"+new_chat_member.username+"\n");
+            reply += ("@"+new_chat_member.username);
         } else if(new_chat_member.first_name != undefined){
-            reply += ("\n@"+new_chat_member.first_name+"\n");
+            reply += (new_chat_member.first_name);
+            if(new_chat_member.last_name != undefined){
+                reply += (new_chat_member.last_name);
+            }
         }
     });
+    reply += (" " + punctuations[Math.floor(Math.random()*punctuations.length)] +"\n");
     const closers = ["We're so glad you're here!", "We're so happy you made it!", "We're so happy to see you!", "It's great to have you!", "It's awesome that you're here!", "We're so happy to have you!", "It's great to see you!", "We're so happy you're here!"];
-    reply += ("\nWelcome to the Coin Sack Telegram chat! "+closers[Math.floor(Math.random()*closers.length)]);
+    reply += ("Welcome to the Coin Sack Telegram chat! " + closers[Math.floor(Math.random()*closers.length)]);
     context.reply(reply);
 }));
 
